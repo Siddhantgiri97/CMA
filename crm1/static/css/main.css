@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
+#logo {
+	font-family: "Satisfy", cursive;
+}
+
+body {
+	background-color: #ebeff5;
+}
+
+#total-orders {
+	background-color: #4cb4c7;
+}
+
+#orders-delivered {
+	background-color: #7abecc;
+}
+
+#orders-pending {
+	background-color: #7cd1c0;
+}
+.profile_pic {
+	max-width: 200px;
+	max-height: 200px;
+	margin: 0 auto;
+	border-radius: 50%;
+}
