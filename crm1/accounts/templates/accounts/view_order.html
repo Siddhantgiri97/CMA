@@ -1,0 +1,63 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col card card-body">
+            <h2>Order Id - {{order.id}}</h2>
+            <div>
+
+                <span class="badge bg-primary" id="status">Pending</span>
+            </div>
+            <div class="progress mt-4">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 5%"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var order_id = '{{order.id}}'
+
+
+    function increaseProgress(status, progress) {
+        var progress_html = document.querySelector('.progress-bar')
+        var status_html = document.querySelector("#status")
+
+        status_html.innerHTML = status
+        progress_html.style.width = progress + '%'
+
+        if (progress == 33) {
+            progress_html.classList.add("bg-info")
+        } else if (progress == 66) {
+            progress_html.classList.remove("bg-info")
+            progress_html.classList.add("bg-warning")
+        } else if (progress == 100) {
+            progress_html.classList.remove("bg-warning")
+            progress_html.classList.add("bg-danger")
+        }
+
+
+    }
+
+    let socket = new WebSocket('ws://localhost:8000/ws/product/' + order_id)
+
+    socket.onopen = function (e) {
+        console.log("Connection Established");
+    }
+
+    socket.onmessage = function (e) {
+        var data = JSON.parse(e.data);
+        increaseProgress(data.payload.status, data.payload.progress, data.payload.bar_color)
+    }
+
+    socket.onclose = function (e) {
+        console.log("Connection Closed");
+    }
+</script>
+
+{% endblock content %}

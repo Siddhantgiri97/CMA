@@ -14,6 +14,7 @@
                     <th>Product</th>
                     <th>Category</th>
                     <th>Price</th>
+                    <th>Action</th>
                 </tr>
 
                 {% for product in products %}
@@ -21,6 +22,8 @@
                     <td>{{product.name}}</td>
                     <td>{{product.category}}</td>
                     <td>{{product.price}}</td>
+                    <td><button class="btn btn-primary btn-sm" onclick="createOrder({{product.id}})">Add to
+                            cart</button></td>
                 </tr>
                 {% endfor %}
 
@@ -28,5 +31,20 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.min.js"
+    integrity="sha512-/Q6t3CASm04EliI1QyIDAA/nDo9R8FQ/BULoUFyN4n/BDdyIxeH7u++Z+eobdmr11gG5D/6nPFyDlnisDwhpYA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    function createOrder(id) {
+        axios.post('/api/order/',{'id':id})
+        .then(res =>{
+            console.log(res);
+            if(res.data.status){
+                window.location.reload()
+            }
+        })
+    }
+</script>
 
 {% endblock content %}

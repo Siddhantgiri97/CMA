@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -71,6 +72,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'crm1.wsgi.application'
+ASGI_APPLICATION = 'crm1.asgi.application'
 
 
 # Database
@@ -143,3 +145,13 @@ EMAIL_PORT = 587
 EMAIL_USER_TLS = True
 EMAIL_HOST_USER = 'siddhantgiri2000@gmail.com'
 EMAIL_HOST_PASSWORD = 'Siddhant@12'
+
+
+CHANNEL_LAYERS = {
+    'default': {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}

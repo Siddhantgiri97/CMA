@@ -2,9 +2,17 @@
 {% load static %}
 
 {% block content %}
-<style>
 
+
+<style>
+    .profile-pic {
+        max-width: 200px;
+        max-height: 200px;
+        margin: 0 auto;
+        border-radius: 50%;
+    }
 </style>
+
 <br>
 <div class="row m-3">
     <div class="col-md-3">
@@ -13,7 +21,7 @@
             <hr>
             <h3 style="text-align: center;">Account Settings</h3>
             <hr>
-            <img class="profile-pic" src="{{request.user.customer.profile_pic.url}}" alt="">
+            <img class="profile-pic" src="{{customer.profile_pic.url}}" alt="">
         </div>
     </div>
 
